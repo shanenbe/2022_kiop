@@ -11,6 +11,24 @@ public class Record implements LTerm {
 
     public final List<Pair<String, LTerm>> elements = new ArrayList<>();
 
+    public Record() {}
+
+    public Record(String k, LTerm v) {
+        addElement(k, v);
+    }
+
+    public Record(String k, LTerm v, String k2, LTerm v2) {
+        addElement(k, v);
+        addElement(k2, v2);
+    }
+
+    public Record(String k, LTerm v, String k2, LTerm v2,  String k3, LTerm v3) {
+        addElement(k, v);
+        addElement(k2, v2);
+        addElement(k3, v3);
+    }
+
+
     public void addElement(String s, LTerm t) {
         elements.add(new Pair<>(s, t));
     }

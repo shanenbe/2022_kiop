@@ -3,21 +3,54 @@ package tests;
 import junit.framework.TestCase;
 import lambda.Environment;
 import lambda.lterm.*;
+import lambda.lterm.Record;
 import lambda.lterm.literal.*;
 import lambda.lterm.literal.sumtype.Case;
-import lambda.type.BoolType;
-import lambda.type.NumType;
-import lambda.type.SumType;
-import lambda.type.Type;
+import lambda.lterm.literal.sumtype.InL;
+import lambda.type.*;
 
 public class Test_TermReduction extends TestCase {
 
+
+    /**
+     *
+     * (Lp:{x:Num, y:Num}. p.x) {x=42, y=666} -> 42
+     * (Lp:{x:Num, y:Num}. p.x) {x=42, y=666} : Num
+     *
+     */
+    public void test_record_01() {
+        Record r = Record("x", 42, "y", 666);
+        Abstraction abs =
+                Abs("p", RecordType("x", Num(), "y", Num()),
+                        Proj(Var("p"), "x")
+                );
+        Application app = App(abs, r);
+        LTerm result = app.reduceAll();
+        assertEquals(result, Num(42));
+
+    }
+
+    private Projection Proj(LTerm p, String s) {
+        return new Projection(p, s);
+    }
+
+    private RecordType RecordType(String x, NumType num) {
+        return new RecordType(x, num);
+    }
+
+    private RecordType RecordType(String x, NumType num, String y, NumType num1) {
+        return new RecordType(x, num, y, num1);
+    }
+
+    private RecordType RecordType(String x, NumType num, String y, NumType num1, String z, NumType num2) {
+        return new RecordType(x, num, y, num1, z, num2);
+    }
 
 
     public void test_iif() {
         Iif iif = Iif(True(), True(), Num(42));
         assertEquals(SumType(Bool(), Num()), iif.type_of(E()));
-        assertEquals(True(), iif.reduce());
+        assertEquals(Inl(SumType(Bool(), Num()), True()), iif.reduce());
         Case _case = Case(iif, SumType(Bool(), Num()), "a", True(), "b", True() );
         assertEquals(True(), _case.reduce().reduce());
 
@@ -104,12 +137,12 @@ public class Test_TermReduction extends TestCase {
 //
 //    }
 
-    private LTerm App(LTerm abstraction, LTerm variable) {
+    private Application App(LTerm abstraction, LTerm variable) {
         return new Application(abstraction, variable);
     }
 
-    private LTerm Abs(String x, Type type, LTerm t) {
-        return new Abstraction("x", type, t);
+    private Abstraction Abs(String x, Type type, LTerm t) {
+        return new Abstraction(x, type, t);
     }
 
 
@@ -146,6 +179,25 @@ public class Test_TermReduction extends TestCase {
         return new Plus();
     }
 
+    private Record Record(String k, int v, String k2, int v2) {
+        return new Record(k, Num(v), k2, Num(v2));
+    }
+
+    private Record Record(String k, int v, String k2, int v2, String k3, int v3) {
+        return new Record(k, Num(v), k2, Num(v2), k3, Num(v3));
+    }
+
+    private Record Record(String k, int v) {
+        return new Record(k, Num(v));
+    }
+
+    private Record Record(String k, LTerm v) {
+        return new Record(k, v);
+    }
+
+    public InL Inl(SumType st, LTerm t) {
+        return new InL(st, t);
+    }
 
     private Environment E() {
         return new Environment();

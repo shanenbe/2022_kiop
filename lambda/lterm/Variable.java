@@ -1,7 +1,6 @@
 package lambda.lterm;
 
 import lambda.Environment;
-import lambda.functions.Visitor;
 import lambda.type.Type;
 
 import java.util.HashSet;
@@ -75,8 +74,4 @@ public class Variable implements LTerm {
         return Objects.hash(varname);
     }
 
-    @Override
-    public void accept(Visitor v) {
-        v.visit(this);
-    }
 }

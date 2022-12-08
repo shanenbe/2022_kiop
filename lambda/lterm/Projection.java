@@ -8,13 +8,13 @@ import java.util.Set;
 
 public class Projection implements LTerm {
     LTerm term;
+    String label;
 
     public Projection(LTerm term, String label) {
         this.term = term;
         this.label = label;
     }
 
-    String label;
 
     @Override
     public LTerm reduce() {

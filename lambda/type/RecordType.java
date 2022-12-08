@@ -12,6 +12,23 @@ public class RecordType extends Type {
 
     public final List<Pair<String, Type>> elements = new ArrayList<>();
 
+    public RecordType() {}
+
+    public RecordType(String k, NumType v) {
+        addElement(k, v);
+    }
+
+    public RecordType(String k1, NumType v1, String k2, NumType v2) {
+        addElement(k1, v1);
+        addElement(k2, v2);
+    }
+
+    public RecordType(String k1, NumType v1, String k2, NumType v2, String k3, NumType v3) {
+        addElement(k1, v1);
+        addElement(k2, v2);
+        addElement(k3, v3);
+    }
+
     public void addElement(String s, Type t) {
         elements.add(new Pair<>(s, t));
     }
