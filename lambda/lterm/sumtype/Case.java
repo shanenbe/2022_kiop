@@ -1,6 +1,7 @@
-package lambda.lterm.literal.sumtype;
+package lambda.lterm.sumtype;
 
 import lambda.Environment;
+import lambda.Memory;
 import lambda.lterm.LTerm;
 import lambda.type.SumType;
 import lambda.type.Type;
@@ -27,10 +28,10 @@ public class Case implements LTerm {
 
 
     @Override
-    public LTerm reduce() {
+    public LTerm reduce(Memory memory) {
 
         if(condition.isReducible())
-            return new Case(condition.reduce(), sumType.clone(), leftVar, left.clone(), rightVar, right.clone());
+            return new Case(condition.reduce(memory), sumType.clone(), leftVar, left.clone(), rightVar, right.clone());
 
         if(condition instanceof InL) {
             InL condInl = (InL) condition;

@@ -1,6 +1,7 @@
 package lambda.lterm.literal;
 
 import lambda.Environment;
+import lambda.Memory;
 import lambda.lterm.LTerm;
 import lambda.type.NumType;
 import lambda.type.Type;
@@ -17,7 +18,7 @@ public class NumberTerm implements LTerm {
     }
 
     @Override
-    public LTerm reduce() {
+    public LTerm reduce(Memory memory) {
         throw new RuntimeException("Numbers cannot be reduced");
     }
 

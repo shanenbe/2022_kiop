@@ -1,9 +1,9 @@
 package lambda.lterm;
 
 import lambda.Environment;
+import lambda.Memory;
 import lambda.type.Type;
 
-import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -17,7 +17,7 @@ public class Variable implements LTerm {
     }
 
     @Override
-    public LTerm reduce() {
+    public LTerm reduce(Memory memory) {
         throw new RuntimeException("Reduzier keine Variablen");
     }
 

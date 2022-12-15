@@ -2,8 +2,8 @@ package lambda.lterm;
 
 import etc.Pair;
 import lambda.Environment;
+import lambda.Memory;
 import lambda.type.RecordType;
-import lambda.type.Type;
 
 import java.util.*;
 
@@ -68,9 +68,10 @@ public class Record implements LTerm {
     /**
      *
      *     {l1.....ln} -> {.....li'.....)
+     * @param memory
      */
 
-    public Record reduce() {
+    public Record reduce(Memory memory) {
 
         Record ret = this.clone();
 
@@ -79,7 +80,7 @@ public class Record implements LTerm {
                 ret.elements.set(i,
                     new Pair<String, LTerm>(
                         this.elements.get(i).left,
-                        this.elements.get(i).right.reduce())
+                        this.elements.get(i).right.reduce(memory))
                 );
                 return ret;
             }

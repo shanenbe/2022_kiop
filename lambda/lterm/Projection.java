@@ -1,6 +1,7 @@
 package lambda.lterm;
 
 import lambda.Environment;
+import lambda.Memory;
 import lambda.type.RecordType;
 import lambda.type.Type;
 
@@ -17,9 +18,9 @@ public class Projection implements LTerm {
 
 
     @Override
-    public LTerm reduce() {
+    public LTerm reduce(Memory memory) {
         if(term.isReducible())
-            return new Projection(term.reduce(), label);
+            return new Projection(term.reduce(memory), label);
 
         return ((Record) term).get(label);
     }

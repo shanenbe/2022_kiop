@@ -1,6 +1,7 @@
 package lambda.lterm;
 
 import lambda.Environment;
+import lambda.Memory;
 import lambda.type.Type;
 
 import java.util.Set;
@@ -26,9 +27,9 @@ public class Let implements LTerm {
      */
 
 
-    public LTerm reduce() {
+    public LTerm reduce(Memory memory) {
         if(term.isReducible())
-            return new Let(varName, term.reduce(), body.clone());
+            return new Let(varName, term.reduce(memory), body.clone());
         return body.replace(varName, term);
     }
 

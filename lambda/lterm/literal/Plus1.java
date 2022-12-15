@@ -1,6 +1,7 @@
 package lambda.lterm.literal;
 
 import lambda.Environment;
+import lambda.Memory;
 import lambda.lterm.LTerm;
 import lambda.type.FunctionType;
 import lambda.type.NumType;
@@ -18,7 +19,7 @@ public class Plus1 implements LTerm {
     }
 
     @Override
-    public LTerm reduce() {
+    public LTerm reduce(Memory memory) {
         throw new RuntimeException("nicht reduzierbar");
     }
 

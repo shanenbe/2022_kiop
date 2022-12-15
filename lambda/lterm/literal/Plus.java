@@ -1,9 +1,9 @@
 package lambda.lterm.literal;
 
 import lambda.Environment;
+import lambda.Memory;
 import lambda.lterm.Function;
 import lambda.lterm.LTerm;
-import lambda.type.BoolType;
 import lambda.type.FunctionType;
 import lambda.type.NumType;
 import lambda.type.Type;
@@ -13,7 +13,7 @@ import java.util.Set;
 
 public class Plus extends Function {
     @Override
-    public LTerm reduce() {
+    public LTerm reduce(Memory memory) {
         throw new RuntimeException("nicht reduzierbar");
     }
 

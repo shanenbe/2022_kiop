@@ -1,10 +1,11 @@
 package lambda.lterm;
 
 import lambda.Environment;
+import lambda.Memory;
 import lambda.lterm.literal.False;
 import lambda.lterm.literal.True;
-import lambda.lterm.literal.sumtype.InL;
-import lambda.lterm.literal.sumtype.InR;
+import lambda.lterm.sumtype.InL;
+import lambda.lterm.sumtype.InR;
 import lambda.type.BoolType;
 import lambda.type.SumType;
 import lambda.type.Type;
@@ -55,12 +56,13 @@ public class Iif implements LTerm {
      *   |- t1: T1                |- t2: T2
      *   ============================================
      *     if true then t1 else t2 -> Inl T1+T2 t1
+     * @param memory
      */
 
     @Override
-    public LTerm reduce() {
+    public LTerm reduce(Memory memory) {
         if(condition.isReducible())
-            return new Iif(condition.reduce(), _then.clone(), _else.clone());
+            return new Iif(condition.reduce(memory), _then.clone(), _else.clone());
 
         Type T1 = _then.type_of(new Environment());
         Type T2 = _else.type_of(new Environment());

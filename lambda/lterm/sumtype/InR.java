@@ -1,6 +1,7 @@
-package lambda.lterm.literal.sumtype;
+package lambda.lterm.sumtype;
 
 import lambda.Environment;
+import lambda.Memory;
 import lambda.lterm.LTerm;
 import lambda.type.SumType;
 import lambda.type.Type;
@@ -19,11 +20,12 @@ public class InR implements LTerm {
 
     /**
      * Bsp: inl Bool+Num (not true) -> inl Bool+Num (false)
+     * @param memory
      */
     @Override
-    public LTerm reduce() {
+    public LTerm reduce(Memory memory) {
         if (term.isReducible())
-            return new InR(sumtype.clone(), term.reduce());
+            return new InR(sumtype.clone(), term.reduce(memory));
         throw new RuntimeException("Cannot reduce ....");
     }
 

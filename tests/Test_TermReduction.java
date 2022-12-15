@@ -5,8 +5,8 @@ import lambda.Environment;
 import lambda.lterm.*;
 import lambda.lterm.Record;
 import lambda.lterm.literal.*;
-import lambda.lterm.literal.sumtype.Case;
-import lambda.lterm.literal.sumtype.InL;
+import lambda.lterm.sumtype.Case;
+import lambda.lterm.sumtype.InL;
 import lambda.type.*;
 
 public class Test_TermReduction extends TestCase {

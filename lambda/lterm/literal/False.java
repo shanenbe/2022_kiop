@@ -1,6 +1,7 @@
 package lambda.lterm.literal;
 
 import lambda.Environment;
+import lambda.Memory;
 import lambda.lterm.LTerm;
 import lambda.type.BoolType;
 import lambda.type.Type;
@@ -10,7 +11,7 @@ import java.util.Set;
 
 public class False implements LTerm {
     @Override
-    public LTerm reduce() {
+    public LTerm reduce(Memory memory) {
         throw new RuntimeException("Cannot reduce True");
     }
 

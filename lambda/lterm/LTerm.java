@@ -1,13 +1,14 @@
 package lambda.lterm;
 
 import lambda.Environment;
+import lambda.Memory;
 import lambda.type.Type;
 
-import java.util.Collection;
 import java.util.Set;
 
 public interface LTerm {
-   public LTerm reduce();
+
+   public LTerm reduce(Memory memory);
 
     default public boolean isFunction() {
         return false;
@@ -23,10 +24,10 @@ public interface LTerm {
 
     public boolean isReducible();
 
-    public default LTerm reduceAll() {
+    public default LTerm reduceAll(Memory memory) {
         LTerm t = this;
         while(t.isReducible())
-            t = t.reduce();
+            t = t.reduce(memory);
         return t;
     }
 

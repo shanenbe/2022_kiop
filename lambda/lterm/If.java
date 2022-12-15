@@ -1,6 +1,7 @@
 package lambda.lterm;
 
 import lambda.Environment;
+import lambda.Memory;
 import lambda.lterm.literal.False;
 import lambda.lterm.literal.True;
 import lambda.type.BoolType;
@@ -31,9 +32,9 @@ public class If implements LTerm {
      * E-ifFalse: if flase then t2 else t3 -> t3
      *
      */
-    public LTerm reduce() {
+    public LTerm reduce(Memory memory) {
         if(condition.isReducible())
-            return new If(condition.reduce(), _then.clone(), _else.clone());
+            return new If(condition.reduce(memory), _then.clone(), _else.clone());
 
         if(condition.equals(new True()))
             return _then.clone();

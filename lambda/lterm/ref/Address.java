@@ -1,28 +1,24 @@
-package lambda.lterm.literal;
+package lambda.lterm.ref;
 
 import lambda.Environment;
 import lambda.Memory;
 import lambda.lterm.LTerm;
-import lambda.type.BoolType;
 import lambda.type.Type;
 
 import java.util.HashSet;
 import java.util.Set;
 
-public class True implements LTerm {
+public class Address implements LTerm {
+
+    public Address(int index) {
+        this.index = index;
+    }
+
+    public final int index;
+
     @Override
     public LTerm reduce(Memory memory) {
-        throw new RuntimeException("Cannot reduce True");
-    }
-
-    @Override
-    public boolean isFunction() {
-        return false;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        return obj instanceof True;
+        throw new RuntimeException("Adressen können sich nicht reduzieren");
     }
 
     @Override
@@ -32,20 +28,21 @@ public class True implements LTerm {
 
     @Override
     public LTerm clone() {
-        return new True();
+        return new Address(this.index);
     }
 
     @Override
     public Set<String> freeVariables() {
-        return new HashSet();
+        return new HashSet<>();
     }
 
+    @Override
     public boolean isReducible() {
         return false;
     }
 
     @Override
     public Type type_of(Environment e) {
-        return new BoolType();
+        throw new RuntimeException("Besser nicht nachfragen");
     }
 }

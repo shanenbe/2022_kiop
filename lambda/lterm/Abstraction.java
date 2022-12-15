@@ -1,6 +1,7 @@
 package lambda.lterm;
 
 import lambda.Environment;
+import lambda.Memory;
 import lambda.type.FunctionType;
 import lambda.type.Type;
 
@@ -24,7 +25,7 @@ public class Abstraction extends Function {
     }
 
     @Override
-    public LTerm reduce() {
+    public LTerm reduce(Memory memory) {
         throw new RuntimeException("Reduzier keine Abstraction");
     }
 

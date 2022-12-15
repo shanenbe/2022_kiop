@@ -1,6 +1,7 @@
 package lambda.lterm.literal;
 
 import lambda.Environment;
+import lambda.Memory;
 import lambda.lterm.Function;
 import lambda.lterm.LTerm;
 import lambda.type.BoolType;
@@ -11,8 +12,8 @@ import java.util.Set;
 
 public class Not extends Function {
     @Override
-    public LTerm reduce() {
-        return null;
+    public LTerm reduce(Memory memory) {
+        throw new RuntimeException("dont reduce not");
     }
 
     @Override

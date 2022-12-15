@@ -1,10 +1,12 @@
 package lambda.lterm;
 
+import lambda.Memory;
+
 import java.util.Set;
 
 public abstract class Function implements LTerm {
     @Override
-    public LTerm reduce() {
+    public LTerm reduce(Memory memory) {
         return null;
     }
 

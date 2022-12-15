@@ -1,6 +1,7 @@
 package lambda.lterm;
 
 import lambda.Environment;
+import lambda.Memory;
 import lambda.type.FunctionType;
 import lambda.type.Type;
 
@@ -34,13 +35,13 @@ public class Application implements LTerm {
     // EApp3
     //        (Lx:T.t) t2 -> [x:=t2] t
 
-    public LTerm reduce() {
+    public LTerm reduce(Memory memory) {
 
         if(left.isReducible())
-            return new Application(left.reduce(), right.clone());
+            return new Application(left.reduce(memory), right.clone());
 
         if(right.isReducible())
-            return new Application(left.clone(), right.reduce());
+            return new Application(left.clone(), right.reduce(memory));
 
         if(left.isFunction())
             return ((Function) left).apply(right);
