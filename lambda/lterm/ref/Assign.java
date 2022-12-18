@@ -25,8 +25,13 @@ public class Assign implements LTerm {
         if (address.isReducible()) return new Assign(address.reduce(memory),element);
         if (element.isReducible()) return new Assign(address,element.reduce(memory));
 
-        memory.assign((Address)address,element);
-        return new Unit();
+        LTerm curr=memory.dereference((Address) address);
+        if(curr.type_of(new Environment()).equals(element.type_of(new Environment())))
+        {
+            memory.assign((Address)address,element);
+            return new Unit();
+        }
+        else throw new RuntimeException("Types dont match");
     }
     @Override
     public LTerm replace(String header, LTerm t) {
