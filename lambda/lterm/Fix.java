@@ -10,8 +10,8 @@ import java.util.Set;
 
 public class Fix implements LTerm{
 
-    Abstraction identifier;
-    LTerm term;
+    public final Abstraction identifier;
+    public final LTerm term;
 
     public Fix(Abstraction identifier, LTerm term) {
         this.identifier = identifier;
@@ -42,7 +42,7 @@ public class Fix implements LTerm{
         return ret;
     }
 
-    //Hier bin ich mir unsicher Teoretisch ja immer Reduzierbar, aber es gibt ja eine Abbruchbedingung.
+    //Hier bin ich mir unsicher theoretisch ja immer Reduzierbar, aber es gibt ja eine Abbruchbedingung.
     @Override
     public boolean isReducible() {
         return true;

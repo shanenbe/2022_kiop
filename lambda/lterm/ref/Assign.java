@@ -12,8 +12,8 @@ import java.util.Set;
 
 public class Assign implements LTerm {
 
-    LTerm address;
-    LTerm element;
+    public final LTerm address;
+    public final LTerm element;
 
     public Assign(LTerm address, LTerm element) {
         this.address = address;

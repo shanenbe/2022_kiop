@@ -14,17 +14,22 @@ import lambda.type.*;
 
 public class Test_TermReduction extends TestCase {
 
-    public void test_memory()
+
+    public void test_is()
+    {
+        LTerm number = this.Num(5);
+        Is is = new Is(number,new NumType());
+        assertEquals(this.True(),is.reduce(this.Mem()));
+        Is falseIs=new Is(number,new BoolType());
+        assertEquals(this.False(),falseIs.reduce(this.Mem()));
+    }
+    public void test_memory_exc()
     {
         Memory mem = new Memory();
         True t = this.True();
         Address adress=mem.create_ref_in_memory(t);
-        False f=this.False();
-        Assign assign = new Assign(adress,f);
-        assign.reduce(mem);
-        assertEquals(f,mem.dereference(adress));
         LTerm num = this.Num(5);
-        assign=new Assign(adress,num);
+        Assign assign=new Assign(adress,num);
         try {
             assign.reduce(mem);
         }
@@ -32,7 +37,17 @@ public class Test_TermReduction extends TestCase {
         {
             assertNotNull(E);
         }
-
+    }
+    public void test_memory()
+    {
+        Memory mem = new Memory();
+        True t = this.True();
+        Address adress=mem.create_ref_in_memory(t);
+        False f=this.False();
+        LTerm assign = new Assign(adress,f);
+        assign=assign.reduce(mem);
+        assertEquals(f,mem.dereference(adress));
+        assertEquals(new UnitType(),assign.type_of(this.E()));
     }
     /**
      *
